@@ -3,6 +3,7 @@ package uk.co.epii.conservatives.williampittjr;
 
 import org.apache.log4j.Logger;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.image.BufferedImage;
@@ -152,6 +153,17 @@ public class LogoGenerator {
         height += g.getFont().createGlyphVector(frc, "o").getPixelBounds(frc, 0, 0).getHeight();
         LOG.debug(String.format("Cxo %d --> %f", size, height));
         return height;
+    }
+
+    public static LogoGenerator getInstance() {
+        try {
+            BufferedImage bufferedImage =
+                    ImageIO.read(Main.class.getResourceAsStream("/conservative_party_logo.png"));
+            return new LogoGenerator(bufferedImage, new Rectangle(0, 29, bufferedImage.getWidth(), 162));
+        }
+        catch (IOException ioe) {
+            throw new RuntimeException(ioe);
+        }
     }
 
 
