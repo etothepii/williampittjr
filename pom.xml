@@ -4,7 +4,7 @@
 
   <groupId>uk.co.epii.conservatives</groupId>
   <artifactId>williampittjr</artifactId>
-  <version>0.0.1a</version>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
   
   <description>A single-jar Application</description>
