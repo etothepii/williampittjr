@@ -1,5 +1,6 @@
 package uk.co.epii.conservatives.williampittjr;
 
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -7,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * User: James Robinson
@@ -15,7 +17,16 @@ import java.awt.image.BufferedImage;
  */
 public class LogoGeneratorTests {
 
-    private final ConservativeLogoGeneratorImpl conservativeLogoGeneratorImpl = ConservativeLogoGeneratorImpl.getInstance();
+    private static ConservativeLogoGeneratorImpl conservativeLogoGeneratorImpl;
+
+    @BeforeClass
+    public static void setUp() {
+        try {
+            conservativeLogoGeneratorImpl = new ConservativeLogoGeneratorImpl();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Test
     @Ignore
