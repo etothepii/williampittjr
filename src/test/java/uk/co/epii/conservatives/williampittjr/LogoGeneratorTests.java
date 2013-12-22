@@ -1,16 +1,12 @@
 package uk.co.epii.conservatives.williampittjr;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 /**
  * User: James Robinson
@@ -19,7 +15,7 @@ import java.io.IOException;
  */
 public class LogoGeneratorTests {
 
-    private final LogoGenerator logoGenerator = LogoGenerator.getInstance();
+    private final ConservativeLogoGeneratorImpl conservativeLogoGeneratorImpl = ConservativeLogoGeneratorImpl.getInstance();
 
     @Test
     @Ignore
@@ -36,8 +32,8 @@ public class LogoGeneratorTests {
         int totalHeight = 50;
         for (int i = 0; i < associationNames.length; i++) {
             logos[i] = new BufferedImage[] {
-                logoGenerator.getLogo(associationNames[i]),
-                logoGenerator.getPaddedLogo(associationNames[i])
+                conservativeLogoGeneratorImpl.getLogo(associationNames[i]),
+                conservativeLogoGeneratorImpl.getPaddedLogo(associationNames[i])
             };
             if (maxWidth < logos[i][1].getWidth()) {
                 maxWidth = logos[i][1].getWidth();

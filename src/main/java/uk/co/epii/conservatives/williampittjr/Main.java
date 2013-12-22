@@ -16,10 +16,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedImage bufferedImage =
                 ImageIO.read(Main.class.getResourceAsStream("/conservative_party_logo.png"));
-        LogoGenerator logoGenerator = new LogoGenerator(bufferedImage, new Rectangle(0, 29, bufferedImage.getWidth(), 162));
-        BufferedImage namedLogo = logoGenerator.getLogo("Beaconsfield");
+        ConservativeLogoGeneratorImpl conservativeLogoGeneratorImpl = new ConservativeLogoGeneratorImpl(bufferedImage, new Rectangle(0, 29, bufferedImage.getWidth(), 162));
+        BufferedImage namedLogo = conservativeLogoGeneratorImpl.getLogo("Beaconsfield");
         ImageIO.write(namedLogo, "png", new File(System.getProperty("user.home") + "/frederickNorth/beaconsfieldLogo.png"));
-        BufferedImage paddedLogo = logoGenerator.getPaddedLogo("Poplar and Limehouse");
+        BufferedImage paddedLogo = conservativeLogoGeneratorImpl.getPaddedLogo("Poplar and Limehouse");
         ImageIO.write(paddedLogo, "png", new File(System.getProperty("user.home") + "/frederickNorth/beaconsfieldPaddedLogo.png"));
     }
 
