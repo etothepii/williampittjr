@@ -15,15 +15,15 @@ import java.io.InputStream;
  * Date: 15/07/2013
  * Time: 00:02
  */
-public class ConservativeLogoGeneratorImpl implements LogoGenerator {
+public class UKIPLogoGeneratorImpl implements LogoGenerator {
 
-    private static Logger LOG = Logger.getLogger(ConservativeLogoGeneratorImpl.class);
+    private static Logger LOG = Logger.getLogger(UKIPLogoGeneratorImpl.class);
 
     private static final String fontName;
 
     static {
 
-        InputStream is = ConservativeLogoGeneratorImpl.class.getResourceAsStream("/lucidaSansUnicode.ttf");
+        InputStream is = UKIPLogoGeneratorImpl.class.getResourceAsStream("/lucidaSansUnicode.ttf");
         try {
             fontName = Font.createFont(Font.TRUETYPE_FONT, is).getName();
         }
@@ -37,25 +37,25 @@ public class ConservativeLogoGeneratorImpl implements LogoGenerator {
 
     private final BufferedImage logo;
     private final Rectangle bounds;
-    private static final int CONSERVATIVES = 2;
+    private static final int UKIP = 2;
     private static final int NAME = 0;
     private static final int x = 1;
     private static final int C = 3;
     private static final int o = 4;
     private static final int Cy = 5;
-    private static final Color CONSERVATIVE_GREEN = new Color(110, 215, 0);
-    private static final Color CONSERVATIVE_BLUE = new Color(0, 135, 220);
+    private static final Color UKIP_PURPLE = new Color(112, 30, 122);
+    private static final Color UKIP_YELLOW = new Color(254, 223, 0);
     private int fontSize;
 
-    public ConservativeLogoGeneratorImpl() throws IOException {
-        this(ImageIO.read(Main.class.getResourceAsStream("/conservative_party_logo.png")));
+    public UKIPLogoGeneratorImpl() throws IOException {
+        this(ImageIO.read(Main.class.getResourceAsStream("/ukip_party_logo.png")));
     }
 
-    public ConservativeLogoGeneratorImpl(BufferedImage logo) {
-        this(logo, new Rectangle(0, 29, logo.getWidth(), 162));
+    public UKIPLogoGeneratorImpl(BufferedImage logo) {
+        this(logo, new Rectangle(0, 0, logo.getWidth(), 162));
     }
 
-    public ConservativeLogoGeneratorImpl(BufferedImage logo, Rectangle bounds) {
+    public UKIPLogoGeneratorImpl(BufferedImage logo, Rectangle bounds) {
         this.logo = logo;
         this.bounds = bounds;
     }
@@ -64,36 +64,36 @@ public class ConservativeLogoGeneratorImpl implements LogoGenerator {
         fontSize = findBaseHeightForLogo(bounds.height, associationName.length());
         String[] associationNameLines = getOptimalSplit(associationName);
         Rectangle[] pixelBounds = getPixelBounds(fontSize, associationNameLines);
-        int width = logo.getWidth() + pixelBounds[x].width + Math.max(pixelBounds[NAME].width, pixelBounds[CONSERVATIVES].width);
-        BufferedImage namedLogo = new BufferedImage(width, logo.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        int width = logo.getWidth() + pixelBounds[x].width + Math.max(pixelBounds[NAME].width, pixelBounds[UKIP].width);
+        BufferedImage namedLogo = new BufferedImage(width, bounds.height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = (Graphics2D)namedLogo.getGraphics();
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, namedLogo.getWidth(), namedLogo.getHeight());
-        g.drawImage(logo, 0, 0, null);
-        g.setColor(CONSERVATIVE_GREEN);
+        g.drawImage(logo, 0, (bounds.height - logo.getHeight()) / 2, null);
+        g.setColor(UKIP_PURPLE);
         g.setFont(new Font(fontName, Font.BOLD, fontSize));
         for (int i = 0; i < associationNameLines.length; i++) {
             g.drawString(associationNameLines[i],
                     logo.getWidth() + pixelBounds[x].width - pixelBounds[NAME].x, bounds.y - pixelBounds[C].y - pixelBounds[Cy].y * i);
         }
-        g.setColor(CONSERVATIVE_BLUE);
+        g.setColor(UKIP_YELLOW);
         if (associationName.length() > 8) {
             g.setFont(new Font(fontName, Font.BOLD, (fontSize * 3) / 2));
         }
-        g.drawString("Conservatives",
-                logo.getWidth() + pixelBounds[x].width - pixelBounds[CONSERVATIVES].x,
+        g.drawString("UKIP",
+                logo.getWidth() + pixelBounds[x].width - pixelBounds[UKIP].x,
                 bounds.y + bounds.height - pixelBounds[o].y - pixelBounds[o].height);
         return namedLogo;
     }
 
   @Override
   public Color getPrimaryColor() {
-    return CONSERVATIVE_BLUE;
+    return UKIP_PURPLE;
   }
 
   @Override
   public Color getSecondaryColor() {
-    return CONSERVATIVE_GREEN;
+    return UKIP_YELLOW;
   }
 
   private String[] getOptimalSplit(String associationName) {
@@ -215,7 +215,7 @@ public class ConservativeLogoGeneratorImpl implements LogoGenerator {
         rectangles[x] = g.getFont().createGlyphVector(frc, "x").getPixelBounds(frc, 0, 0);
         rectangles[C] = g.getFont().createGlyphVector(frc, "C").getPixelBounds(frc, 0, 0);
         g.setFont(new Font(fontName, Font.BOLD, (base * 3) / 2));
-        rectangles[CONSERVATIVES] = g.getFont().createGlyphVector(frc, "Conservatives").getPixelBounds(frc, 0, 0);
+        rectangles[UKIP] = g.getFont().createGlyphVector(frc, "UKIP").getPixelBounds(frc, 0, 0);
         rectangles[o] = g.getFont().createGlyphVector(frc, "o").getPixelBounds(frc, 0, 0);
         rectangles[Cy] = g.getFont().createGlyphVector(frc, "Cy").getPixelBounds(frc, 0, 0);
         return rectangles;

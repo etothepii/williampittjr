@@ -1,5 +1,6 @@
 package uk.co.epii.conservatives.williampittjr;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -9,6 +10,8 @@ import java.awt.image.BufferedImage;
  */
 public interface LogoGenerator {
 
-    public BufferedImage getLogo(String logoText);
+  public BufferedImage getLogo(String logoText);
+  public Color getPrimaryColor();
+  public Color getSecondaryColor();
 
 }

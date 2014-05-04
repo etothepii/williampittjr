@@ -15,7 +15,7 @@ import java.io.IOException;
  * Date: 06/10/2013
  * Time: 13:51
  */
-public class LogoGeneratorTests {
+public class ConservativeLogoGeneratorImplTests {
 
     private static ConservativeLogoGeneratorImpl conservativeLogoGeneratorImpl;
 
